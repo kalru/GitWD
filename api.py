@@ -20,8 +20,10 @@ class HelloWorld(Resource):
         app.logger.info(request.get_json()['payload_fields']['time'])
         app.logger.info(request.get_json()['payload_fields']['vbat'])
         app.logger.info(request.get_json()['metadata']['time'])
-        for g in request.get_json()['metadata']['gateways']:
-            app.logger.info(g['gtw_id'])
+        # simulated doesn't have gateway
+        if 'gateways' in request.get_json()['metadata']:
+            for g in request.get_json()['metadata']['gateways']:
+                app.logger.info(g['gtw_id'])
         return {'hellsso': 'post', 's1': s1, 's2': s2}
 
 
