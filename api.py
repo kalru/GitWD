@@ -7,15 +7,21 @@ api = Api(app)
 
 class HelloWorld(Resource):
     def get(self):
+        app.logger.info(request.get_data())
         return {'hello': 'get'}
 
     def put(self):
         return {'hello': 'put'}
 
     def post(self, s1='', s2=''):
-        data = request.get_data()
-        app.logger.info(data)
-        app.logger.info(data['app_id'])
+        app.logger.info(request.get_json()['app_id'])
+        app.logger.info(request.get_json()['dev_id'])
+        app.logger.info(request.get_json()['payload_fields']['pcbtemp'])
+        app.logger.info(request.get_json()['payload_fields']['time'])
+        app.logger.info(request.get_json()['payload_fields']['vbat'])
+        app.logger.info(request.get_json()['metadata']['time'])
+        for g in request.get_json()['metadata']['gateways']:
+            app.logger.info(g['gtw_id'])
         return {'hellsso': 'post', 's1': s1, 's2': s2}
 
 
