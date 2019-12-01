@@ -24,6 +24,8 @@ class HelloWorld(Resource):
         if 'gateways' in request.get_json()['metadata']:
             for g in request.get_json()['metadata']['gateways']:
                 app.logger.info(g['gtw_id'])
+        else:
+            app.logger.info('No gateway used... it was probably simulated')
         return {'hellsso': 'post', 's1': s1, 's2': s2}
 
 
