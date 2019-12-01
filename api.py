@@ -13,7 +13,9 @@ class HelloWorld(Resource):
         return {'hello': 'put'}
 
     def post(self, s1='', s2=''):
-        app.logger.info(request.get_data())
+        data = request.get_data()
+        app.logger.info(data)
+        app.logger.info(data['app_id'])
         return {'hellsso': 'post', 's1': s1, 's2': s2}
 
 
